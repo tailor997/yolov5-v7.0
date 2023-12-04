@@ -758,7 +758,8 @@ def run(
     if half and not coreml:
         im, model = im.half(), model.half()  # to FP16
     #shape = tuple((y[0] if isinstance(y, tuple) else y).shape)  # model output shape
-    shape = tuple((y[0] if (isinstance(y, tuple) or (isinstance(y, list))) else y).shape)  # model output shape
+    #shape = tuple((y[0] if (isinstance(y, tuple) or (isinstance(y, list))) else y).shape)  # model output shape  #ref lubancat doc
+    shape = tuple(y[0].shape)  # model output shape #ref https://blog.csdn.net/m0_55217834/article/details/130583886
     metadata = {'stride': int(max(model.stride)), 'names': model.names}  # model metadata
     LOGGER.info(f"\n{colorstr('PyTorch:')} starting from {file} with output shape {shape} ({file_size(file):.1f} MB)")
 
